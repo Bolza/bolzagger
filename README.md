@@ -1,4 +1,4 @@
-# Bolzwagger
+# Bolzagger
 
 Small helper to test Frontend calls to an api against [Swagger](http://swagger.io/) specifications
 
@@ -20,23 +20,23 @@ It does require [Swagger Parser](https://github.com/swagger-api/swagger-parser) 
 ```typescript
 // provide the specs in your test config, here i'm using karma_fixtures
 const API_SPECS = __fixtures__["/api.swagger"]
-let bolzwagger, mockResponse
+let bolzagger, mockResponse
 //Parsing happens asyncronously so keep this in mind during the setup
 beforeEach( (done) => {
     let parser = new SwaggerParser();
     parser.dereference(API_SPECS).then(parsedSpecs => {
-        bolzwagger = new Bolzwagger(parsedSpecs)
+        bolzagger = new Bolzagger(parsedSpecs)
         done()
     });
 })
 let mockResponse = (resp) => {
     mockbackend.connections.subscribe(connection => {
         let url = connection.request.url
-        let endpoint = bolzwagger.getEndpointFromUrl(url)
-        let params = bolzwagger.getParametersFromUrl(url)
-        let endpointSpecs = bolzwagger.getSpecsForRequest('GET', url)
-        let allParamsOk = bolzwagger.parametersAreOk(endpointSpecs, params)
-        let response = bolzwagger.getResponseJSON('GET', url, 200)
+        let endpoint = bolzagger.getEndpointFromUrl(url)
+        let params = bolzagger.getParametersFromUrl(url)
+        let endpointSpecs = bolzagger.getSpecsForRequest('GET', url)
+        let allParamsOk = bolzagger.parametersAreOk(endpointSpecs, params)
+        let response = bolzagger.getResponseJSON('GET', url, 200)
 
         if (!endpoint || !allParamsOk || !response) throw new Error(url, 'not Valid!');        
         let r = { _body: response }
@@ -55,5 +55,10 @@ let mockResponse = (resp) => {
 
 ##### parametersAreOk(`endpointSpecs`, `params`)
 
+##### requestIsOk(`method`, `url`)
+
 ##### getResponseJSON(`method`, `url`, `statusCode`)
+
+
+
 
