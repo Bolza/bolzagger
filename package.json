@@ -2,7 +2,7 @@
   "name": "bolzagger",
   "version": "0.1.5",
   "description": "Test your client against Swagger specifications",
-  "main": "dist/bolzagger.js",
+  "main": "dist/bolzagger.umd.js",
   "scripts": {
     "test": "karma start",
     "prebuild": "gulp prebuild"
@@ -25,10 +25,12 @@
   },
   "homepage": "https://github.com/Bolza/bolzagger#readme",
   "dependencies": {
-    "swagger-parser": "^3.0.0-alpha.5"
+    "swagger-parser": "^3.4.1",
+    "swagger-schema-official": "^2.0.0-bab6bed"
   },
   "devDependencies": {
     "gulp": "^3.9.1",
+    "gulp-rename": "^1.2.2",
     "gulp-typescript": "^2.13.6",
     "jasmine": "^2.4.1",
     "karma": "^0.13.22",
