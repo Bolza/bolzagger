@@ -4,6 +4,10 @@ Small library to test frontend calls toward an API against a [Swagger](http://sw
 
 I developed this helper with Angular1/Angular2 in mind but it's actually library-agnostic.
 
+###Install
+
+`npm install bolzagger --save-dev`
+
 ###Things you can do with this library
 
 - Get the swagger definition for a certain endpoint from the url

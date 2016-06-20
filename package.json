@@ -2,10 +2,10 @@
   "name": "bolzagger",
   "version": "0.1.2",
   "description": "Test your client against Swagger specifications",
-  "main": "bolzagger.es6.js",
+  "main": "dist/bolzagger.js",
   "scripts": {
     "test": "karma start",
-    "prebuild": "tsc"
+    "prebuild": "gulp prebuild"
   },
   "repository": {
     "type": "git",
