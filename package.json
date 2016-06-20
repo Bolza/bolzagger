@@ -1,6 +1,6 @@
 {
   "name": "bolzagger",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Test your client against Swagger specifications",
   "main": "bolzagger.es6.js",
   "scripts": {
