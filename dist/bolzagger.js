@@ -1,6 +1,8 @@
 "use strict";
+var SwaggerParser = require("swagger-parser");
 var Bolzagger = (function () {
     function Bolzagger(ApiSpecs) {
+        console.log('SwaggerParser', SwaggerParser);
         this.swaggerSpecs = ApiSpecs;
         this.endpointMatchers = {};
         var matcher = new RegExp('({.+})', 'gi');
@@ -80,4 +82,3 @@ var Bolzagger = (function () {
     return Bolzagger;
 }());
 exports.Bolzagger = Bolzagger;
-//# sourceMappingURL=bolzagger.js.map

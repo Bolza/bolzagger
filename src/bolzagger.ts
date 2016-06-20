@@ -1,3 +1,6 @@
+/// <reference path="../typings.d.ts" />
+import SwaggerParser = require("swagger-parser");
+
 interface Espec {
 	parameters: Array<any>
 	paths: Object
@@ -17,6 +20,7 @@ export class Bolzagger {
 			let endpointMatch = path.replace(matcher, '({.+})')
 			this.endpointMatchers[endpointMatch] = ApiSpecs.paths[path]
 		}
+		SwaggerParser
 	}
 
 	// Utility Methods
