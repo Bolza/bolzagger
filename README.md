@@ -45,15 +45,21 @@ let mockResponse = (resp) => {
 }
 ```
 
-###Methods
+###Api
+
+##### parseParamsString(`url`)
 
 ##### getEndpointFromUrl(`url`)
 
+##### validateMethod(`method` || `url`)
+
 ##### getParametersFromUrl(`url`)
 
-##### getSpecsForRequest(`method`, `url`)
+##### getEndpointSpecs(`method`, `url`)
 
-##### parametersAreOk(`endpointSpecs`, `params`)
+##### validateParameters(`espec`, `params`)
+
+##### parametersAreOk(`method`, `url`)
 
 ##### requestIsOk(`method`, `url`)
 
