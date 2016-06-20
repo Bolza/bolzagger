@@ -1,16 +1,12 @@
 # Bolzagger
 
-Small helper to test Frontend calls to an api against [Swagger](http://swagger.io/) specifications
+Small library to test frontend calls toward an API against a [Swagger](http://swagger.io/) specifications without ever call the real backend. If you use [Angular](http://angular.io/) you can use `mockBackend` and let this library intercept the actual request. 
 
-- `npm install swagger-parser --save-dev`
-
-I developed this helper with Angular2 in mind but it's completely library-agnostic.
-
-It does require [Swagger Parser](https://github.com/swagger-api/swagger-parser) to parse the specs file (in JSON or YAML format) and resolve the references.
+I developed this helper with Angular1/Angular2 in mind but it's actually library-agnostic.
 
 ###Things you can do with this library
 
-- Get the swagger definition for a certain endpoint from the urlp
+- Get the swagger definition for a certain endpoint from the url
 - Check that a certain method exist for that endpoint
 - Check that each param passed to the endpoint is valid and defined
 - Return the example response for that endpoint if exists.
