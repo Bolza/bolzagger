@@ -2,7 +2,6 @@
 var SwaggerParser = require("swagger-parser");
 var Bolzagger = (function () {
     function Bolzagger(ApiSpecs) {
-        console.log('SwaggerParser', SwaggerParser);
         this.swaggerSpecs = ApiSpecs;
         this.endpointMatchers = {};
         var matcher = new RegExp('({.+})', 'gi');
@@ -10,6 +9,7 @@ var Bolzagger = (function () {
             var endpointMatch = path.replace(matcher, '({.+})');
             this.endpointMatchers[endpointMatch] = ApiSpecs.paths[path];
         }
+        SwaggerParser;
     }
     Bolzagger.prototype.parseParamsString = function (paramsStr) {
         if (!paramsStr)

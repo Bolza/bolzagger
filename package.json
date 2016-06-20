@@ -25,7 +25,7 @@
   },
   "homepage": "https://github.com/Bolza/bolzagger#readme",
   "dependencies": {
-    "swagger-parser": "^3.4.1"
+    "swagger-parser": "^3.0.0-alpha.5"
   },
   "devDependencies": {
     "gulp": "^3.9.1",
