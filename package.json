@@ -1,6 +1,6 @@
 {
   "name": "bolzagger",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "Test your client against Swagger specifications",
   "main": "dist/bolzagger.js",
   "scripts": {
