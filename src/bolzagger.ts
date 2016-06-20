@@ -1,5 +1,15 @@
+interface Espec {
+	parameters: Array<any>
+	paths: Object
+	basePath: string
+	responses: Object
+}
+
 export class Bolzagger {
-	constructor(ApiSpecs) {
+	private swaggerSpecs:Espec
+	private endpointMatchers:Object
+
+	constructor(ApiSpecs: Espec) {
 		this.swaggerSpecs = ApiSpecs
 		this.endpointMatchers = {}
 		let matcher = new RegExp('({.+})', 'gi');
@@ -10,16 +20,15 @@ export class Bolzagger {
 	}
 
 	// Utility Methods
-
 	/**
 	* Takes a param string and parse it into an object of params
 	* @param {string} str is the part of the url string containing params in the form `?p1=v1&p2=v2&...`
 	* @return {object} this is the returned object containing `{p1: v1, p2: v2, ...}`
-	*/ 
-	parseParamsString(str) {
-		if (!str) return null
-		str = str.replace('?', '')
-		return str.split('&').reduce(function(params, param) {
+	*/
+	parseParamsString(paramsStr:string) {
+		if (!paramsStr) return null
+		paramsStr = paramsStr.replace('?', '')
+		return paramsStr.split('&').reduce(function(params, param) {
 			var paramSplit = param.split('=').map(function(value) {
 				return decodeURIComponent(value.replace('+', ' '));
 			});
@@ -28,13 +37,13 @@ export class Bolzagger {
 		}, {});
 	}
 
-	getEndpointFromUrl(url) {
+	getEndpointFromUrl(url:string) {
 		url = url.split('?')[0]
 		url = url.split(';')[0]
 		return url.replace(this.swaggerSpecs.basePath, '')
 	}
 
-	validateMethod(rawMethod) {
+	validateMethod(rawMethod:any) {
 		if (typeof rawMethod === `string`) return rawMethod.toLowerCase()
 		if (typeof rawMethod === `number`) return ['get', 'post', 'put', 'delete', 'patch', 'head'][rawMethod]
 		throw new Error('Bolzagger.getMethodFromEnum: method must be number or string')
@@ -45,12 +54,12 @@ export class Bolzagger {
 	* @param {string} url is the url string in the form `http://domain.com/page?p1=v1&p2=v2&...`
 	* @return {string} this is the returned string containing `p1=v1&p2=v2&...`
 	*/
-	getParametersFromUrl(url) {
+	getParametersFromUrl(url:string) {
 		url = url.split('?')[1]
 		return this.parseParamsString(url)
 	}
 
-	getEndpointSpecs(method, url) {
+	getEndpointSpecs(method:any, url:string) {
 		method = this.validateMethod(method)
 		url = this.getEndpointFromUrl(url)
 		for (let match in this.endpointMatchers) {
@@ -74,8 +83,8 @@ export class Bolzagger {
 	* @param {object} parameter parameters sent to the endpoint method in a `{key:value}` format
 	*    can be obtained using `.getParametersFromUrl(<url>)`
 	* 
-	*/ 
-	validateParameters(espec, testParams) {
+	*/
+	validateParameters(espec:Espec, testParams:Object) {
 		let validMap = {}
 		for (let testedName in testParams) {
 			let found = espec.parameters.filter(specParamName => testedName === specParamName)
@@ -92,8 +101,9 @@ export class Bolzagger {
 	* @param {string} url is the url string in the form `http://domain.com/page?p1=v1&p2=v2&...`
 	* @return {boolean} this is true if all the parameters present in the url are valid in the Endpoint-SPECS
 	*/
-	parametersAreOk(method, url) {
-		let espec = this.getEndpointSpecs(method, url)
+	parametersAreOk(method:any, url:string) {
+		let espec:Espec = this.getEndpointSpecs(method, url)
+		let testParams = this.getParametersFromUrl(url)
 		let validation = this.validateParameters(espec, testParams)
 		for (let v in validation) {
 			if (!validation[v]) return false
@@ -107,14 +117,14 @@ export class Bolzagger {
 	* @param {string} url is the url string in the form `http://domain.com/page?p1=v1&p2=v2&...`
 	* @return {boolean} this is true if all the request is valid in the Endpoint-SPECS
 	*/
-	requestIsOk(method, url) {
-		let specs = this.getEndpointSpecs(method, url)
+	requestIsOk(method:any, url:string) {
+		let specs:Espec = this.getEndpointSpecs(method, url)
 		return (specs)
 	}
 
 
-	getResponseJSON(method, url, statusCode) {
-		let specs = this.getEndpointSpecs(method, url)
+	getResponseJSON(method:any, url:string, statusCode:number) {
+		let specs:Espec = this.getEndpointSpecs(method, url)
 		let success = specs.responses[statusCode || 'default'].examples['application/json']
 		return success.replace(/[\r\n]/g, '');
 	}

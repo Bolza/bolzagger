@@ -4,7 +4,8 @@
   "description": "Test your client against Swagger specifications",
   "main": "bolzagger.es6.js",
   "scripts": {
-    "test": "karma start"
+    "test": "karma start",
+    "prebuild": "tsc"
   },
   "repository": {
     "type": "git",
@@ -28,6 +29,7 @@
   },
   "devDependencies": {
     "gulp": "^3.9.1",
+    "gulp-typescript": "^2.13.6",
     "jasmine": "^2.4.1",
     "karma": "^0.13.22",
     "karma-chrome-launcher": "^1.0.1",

@@ -45,7 +45,9 @@ let mockResponse = (resp) => {
 }
 ```
 
-###Api
+### Api
+
+#### Utility
 
 ##### parseParamsString(`url`)
 
@@ -59,9 +61,13 @@ let mockResponse = (resp) => {
 
 ##### validateParameters(`espec`, `params`)
 
+#### Request Validation
+
 ##### parametersAreOk(`method`, `url`)
 
 ##### requestIsOk(`method`, `url`)
+
+#### Response Validation
 
 ##### getResponseJSON(`method`, `url`, `statusCode`)
 
